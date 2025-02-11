@@ -2,21 +2,19 @@
 #include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <sys/syscall.h>
 
-
-// 信息SIGUSER1的处理函数
-void siguser1_handler(int signum)
+int main(int argc, char **argv)
 {
-    printf("SIGUSER1 received\n");
-
-}
-
-
-int main()
-{
-    signal(SIGUSR1, siguser1_handler);
-    
-    pause();
+    if (argc != 2 ) {
+        printf("Usage: %s syscall_nr\n", argv[0]);
+        return -1;
+    }
+    long nr = strtol(argv[1], NULL, 10);
+    if (syscall(nr) < 0) {
+        perror("syscall");
+        return -1;
+    }
 
     return 0;
 }
