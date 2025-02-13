@@ -3,7 +3,8 @@
 #include <linux/kernel.h> // printk
 
 #ifndef NR_syscalls
-#define NR_syscalls 448
+#define NR_syscalls 333
+
 #endif
 
 // 创建一个系统调用
